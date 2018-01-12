@@ -1,0 +1,46 @@
+ID: pocApp
+_schema-version: '2.0'
+version: 0.0.1
+modules:
+  - name: web
+    type: html5
+    path: web
+    requires:
+      - name: pocApp_90-uaa
+      - name: core_js_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true
+  - name: core_db
+    type: hdb
+    path: core_db
+    requires:
+      - name: hdi_core_db
+  - name: core_js
+    type: nodejs
+    path: core_js
+    provides:
+      - name: core_js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: pocApp_90-uaa
+      - name: hdi_core_db
+      - name: core_db
+
+  
+
+resources:
+  - name: pocApp_90-uaa
+    type: com.sap.xs.uaa-space
+    parameters:
+      config_path: ./xs-security.json
+  - name: hdi_core_db
+    parameters:
+      config:
+        schema: pocApp_90
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container

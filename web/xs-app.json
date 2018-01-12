@@ -1,0 +1,20 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"routes": [{
+		"source": "/node(.*)",
+		"destination": "core-xsjs-backend",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	}, {
+		"source": "(.*)(.xsjs)",
+		"destination": "core-xsjs-backend",
+		"csrfProtection": false,
+		"authenticationType": "xsuaa"
+	}, {
+		"source": "(.*)(.xsodata)",
+		"destination": "core-xsjs-backend",
+		"authenticationType": "xsuaa"
+	}]
+}
+
